@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + factor.author.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{{ url_for('user_factors', username=factor.author.username) }}">{{ factor.author.username }}</a>
+        <small class="text-muted">{{ factor.date_posted.strftime('%Y-%m-%d') }}</small>
+        {% if factor.author == current_user %}
+        <div>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_factor', factor_idf=factor.idf) }}">Update</a>
+          <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        </div>
+      {% endif %}
+       
+          </div>
+          <h2><a class="article-title" href="{{ url_for('factor', factor_idf=factor.idf) }}">{{ factor.title }}</a></h2>
+          <table id="data" class="table table-striped">
+            <thead>
+              <tr>
+                <th>theme</th>
+                <th>Content</th>
+                <th>idf</th>
+                <th>GRI</th>
+                <th>ODD</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for factor in factors %}
+                <tr>
+                  <td>{{ factor.theme }}</td>
+                  <td>{{ factor.content }}</td>
+                  <td>{{factor.idf }}</td>
+                  <td>{{factor.gri}}</td>
+                  <td>{{ factor.odd }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+       
+      
+      <!-- <h2 class="article-title"> Title : {{ factor.title }}</h2>
+      <p class="article-content"> Content : {{ factor.content }}</p>
+      <p class="article-theme"> Theme : {{ factor.theme }}</p>
+      <p class="article-idf"> idf :{{ factor.idf }}</p>
+      <p class="article-GRI"> GRI : {{ factor.gri }}</p>
+      <p class="article-ODD">ODD :{{ factor.odd }}</p> -->
+    </div>
+  </article>
+   <!-- Modal -->
+   <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" idf ="deleteModalLabel">Delete factor?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <form action="{{ url_for('delete_factor', factor_idf=factor.idf) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %}   

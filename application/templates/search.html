@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    <br/> 
+     <h2>You Searched For...</h2>
+     <p>{{ searched }}</p>
+     <br/>
+  {%for factor in factors%}
+      <a href="{{ url_for('factor', factor_idf=factor.idf) }}">{{factor.title}}
+
+      </a><br/>
+  {%endfor%}
+
+{% endblock  %}

@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{legend}}</legend>
+            <div class="form-group">
+                {{ form.theme.label(class="form-control-label") }}
+                {% if form.theme.errors %}
+                    {{ form.theme(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.theme.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.theme(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.title.label(class="form-control-label") }}
+                {% if form.title.errors %}
+                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.content.label(class="form-control-label") }}
+                {% if form.content.errors %}
+                    {{ form.content(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.content(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.idf.label(class="form-control-label") }}
+                {% if form.idf.errors %}
+                    {{ form.idf(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.idf.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.idf(class="form-control form-control-lg") }}
+                {% endif %}
+                 </div>
+                 
+            <div class="form-group">
+                {{ form.gri.label(class="form-control-label") }}
+                {% if form.gri.errors %}
+                    {{ form.gri(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.gri.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.gri(class="form-control form-control-lg") }}
+                {% endif %}
+                 </div>
+
+                 <div class="form-group">
+                    {{ form.odd.label(class="form-control-label") }}
+                    {% if form.odd.errors %}
+                        {{ form.odd(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.odd.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.odd(class="form-control form-control-lg") }}
+                    {% endif %}
+                     </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="ODD" value="Pas de pauvreté"> <img class="ml-lg-5 order-1 order-lg-2 " width="90" src="{{ url_for('static', filename='17odd/F_SDG goals_icons-individual-rgb-01.png') }}" > 
+                    </label>
+                    <label>
+                        <input type="checkbox" name="ODD" value="Faim « Zéro »"> <img class="ml-lg-5 order-1 order-lg-2 " width="90" src="{{ url_for('static', filename='17odd/téléchargement.jpg') }}" > 
+                    </label>
+                    <label>
+                        <input type="checkbox" name="ODD" value="Bonne santé et bien-être"> <img class="ml-lg-5 order-1 order-lg-2 " width="90" src="{{ url_for('static', filename='17odd/F_SDG-goals_icons-individual-rgb-03.png') }}" > 
+                    </label>
+                </div>
+                
+       
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+       
+    </form>
+</div> 
+{% endblock content %}

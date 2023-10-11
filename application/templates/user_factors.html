@@ -1,0 +1,40 @@
+ {% extends "layout.html" %}
+{% block content %}   
+<h1 class="mb-3">Factors by {{ user.username }} ({{ factors.total }})</h1>
+{% for factor in factors.items %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + factor.author.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{{ url_for('user_factors', username=factor.author.username) }}">{{ factor.author.username }}</a>
+        <small class="text-muted">{{factor.date_posted.strftime('%Y-%m-%d') }}</small>
+        
+           
+          </div>
+        
+     
+          <h2><a class="article-title" href="{{ url_for('factor', factor_idf=factor.idf) }}">{{ factor.title }}</a></h2>
+      <p class="article-theme"> Theme : {{ factor.theme }}</p>
+      <p class="article-content"> Content : {{ factor.content }}</p>
+      <p class="article-idf"> idf : {{ factor.idf }}</p>
+      <p class="article-GRI"> GRI : {{ factor.gri }}</p>
+      <p class="article-ODD">ODD :{{ factor.odd }}</p>
+      
+     
+      </div>
+    </article>
+  {% endfor %}
+  {% for page_num in factors.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+    {% if factors.page == page_num %}
+ 
+     <a class="btn btn-info mb-4" href="{{ url_for('user_factors', username=user.username, page=page_num) }}">{{ page_num }}</a>
+         {% else %}
+     <a class="btn btn-info mb-4" href="{{ url_for('user_factors', username=user.username, page=page_num) }}">{{ page_num }}</a>  
+         {% endif %}
+      
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+  {% endblock content %}
